@@ -1,25 +1,25 @@
 {
-  "name": "cidlinkserver",
+  "name": "cidsocketserver",
   "version": "1.0.0",
-  "description": "CidLink NodeJS communication Server",
+  "description": "SocketIOServer",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EnricoPietrocola/CidLinkServer.git"
+    "url": "git+https://github.com/EnricoPietrocola/CidSocketServer.git"
   },
   "author": "Enrico Pietrocola",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EnricoPietrocola/CidLinkServer/issues"
+    "url": "https://github.com/EnricoPietrocola/CidSocketServer/issues"
   },
-  "homepage": "https://github.com/EnricoPietrocola/CidLinkServer#readme",
+  "homepage": "https://github.com/EnricoPietrocola/CidSocketServer#readme",
+  "devDependencies": {
+    "socket.io": "^3.1.1"
+  },
   "dependencies": {
     "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "socket.io": "^4.0.1"
   }
 }
