@@ -63,20 +63,12 @@ io.on('connection', (socket) => {
         } else {
             //console.log('Room Url not set')
         }
-        socket.to(roomName).broadcast.emit('datachannel', 'A new user joined the room')
+        socket.to(roomName).emit('datachannel', 'A new user joined the room')
     })
 
     socket.on('datachannel', (room, data) => {
         console.log(room + " " + data)
-        socket.to(room).broadcast.emit('datachannel', data)
-
-        if (data !== undefined && data !== null) {
-            if (isJson(data)) {
-                data = JSON.parse(data.toString())
-            } else {
-                //console.log('sendData received non JSON data: ' + data)
-            }
-        }
+        socket.to(room).emit('datachannel', data)
     })
 
     socket.on('disconnecting', () => {
