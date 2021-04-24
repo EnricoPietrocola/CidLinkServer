@@ -68,6 +68,9 @@ io.on('connection', (socket) => {
 
     socket.on('datachannel', (room, data) => {
         console.log(room + " " + data)
+        if(isJson(data)){
+            console.log(room + " " + JSON.parse(data))
+        }
         socket.to(room).emit('datachannel', data)
     })
 
