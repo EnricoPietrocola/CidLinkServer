@@ -49,7 +49,7 @@ function incrementRoomConnection(room){
 
 function decrementRoomConnection(room){
     try{
-        if(room.connections >= 0) {
+        if(room != null && room.connections >= 0) {
             room.connections = room.connections - 1
             console.log('Room ' + room.name + ' has ' + room.connections + ' connected clients')
             if(room.connections <= 0) {
@@ -65,9 +65,6 @@ function decrementRoomConnection(room){
                     console.log('No file attached, nothing to delete')
                 }
             }
-        }
-        else{
-           console.log('Something went wrong with the connection tracking for this room ' + room.name)
         }
     }
     catch (e){
