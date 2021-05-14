@@ -52,13 +52,14 @@ try {
 io.on('connection', (socket) => {
     console.log("new websocket connection")
 
-    socket.on('join', (roomName) => {
+    socket.on('join', (roomName, password) => {
         socket.join(roomName)
         totalConnections++
         rooms.addRoom(roomName, '')
 
-        if (rooms.getRoomURL(roomName) !== '') {
+        console.log(password)
 
+        if (rooms.getRoomURL(roomName) !== '') {
             console.log('Sending room url to client ' + rooms.getRoomURL(roomName) + ' on page ' + rooms.findRoomByName(roomName).currentPage)
         } else {
             //console.log('Room Url not set')
@@ -84,6 +85,17 @@ io.on('connection', (socket) => {
         io.emit('message', 'A user has left')
     })
 })
+
+/*io.use((socket, next) => {
+    if (socket.request.password === "pwd"){
+        console.log("Right Password")
+        next();
+    }
+    else{
+        console.log("Wrong Password")
+        next(new Error("Wrong Password"))
+    }
+})*/
 
 
 function isJson(str) {

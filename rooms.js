@@ -10,6 +10,7 @@ function Room(name, docURL){
     this.roomPath = '';
     this.currentPage = 1;
     this.connections = 0;
+    this.password = "pwd"
 }
 
 let rooms = Array();
