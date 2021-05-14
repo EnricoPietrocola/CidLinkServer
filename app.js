@@ -68,16 +68,17 @@ io.on('connection', (socket) => {
     socket.on('datachannel', (room, data) => {
         const requestedRoom = rooms.findRoomByName(room)
         //if user is in allowed list, send data to others
-        if(requestedRoom.allowedList.indexOf(socket.id) !== -1) {
-            console.log(room + " " + data)
-            if (isJson(data)) {
-                console.log(room + " " + JSON.parse(data))
+        if (requestedRoom != null) {
+            if (requestedRoom.allowedList.indexOf(socket.id) !== -1) {
+                console.log(room + " " + data)
+                if (isJson(data)) {
+                    console.log(room + " " + JSON.parse(data))
+                }
+                socket.to(room).emit('datachannel', data)
+            } else {
+                socket.emit('systemchannel', 'Wrong Password')
+                console.log("wrong password")
             }
-            socket.to(room).emit('datachannel', data)
-        }
-        else{
-            socket.emit('systemchannel', 'Wrong Password')
-            console.log("wrong password")
         }
     })
 
@@ -92,23 +93,6 @@ io.on('connection', (socket) => {
     })
 })
 
-/*io.use((socket, next) => {
-    console.log(socket.request.data)
-    next()
-    //check wether the user is in the whitelist or not
-    if (socket.request.socketRooms(socket.id)){
-        room.allowedList.indexOf(socket.id) === -1 ? room.allowedList.push(socket.id) : console.log("This item already exists");
-
-        //password must be stored somewhere in the request and compared
-        //with the password stored in the room.
-        console.log("Right Password")
-        next();
-    }
-    else{
-        console.log("Wrong Password")
-        next(new Error("Wrong Password"))
-    }
-})*/
 
 
 function isJson(str) {
