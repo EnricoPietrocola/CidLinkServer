@@ -40,10 +40,6 @@ function addRoom(name, docURL){
     }
 }
 
-function setCurrentPageNumber(roomName, pageNumber){
-    findRoomByName(roomName).currentPage = pageNumber
-}
-
 function incrementRoomConnection(room){
     room.connections++
     console.log('Room ' + room.name + ' has ' + room.connections + ' connected clients')
@@ -114,7 +110,6 @@ function getConnectionsCount(){
 
 
 module.exports.addRoom = addRoom
-module.exports.setCurrentPageNumber = setCurrentPageNumber
 module.exports.getRoomURL = getRoomURL
 module.exports.changeRoomDocURL = changeRoomDocURL
 module.exports.decrementRoomConnection = decrementRoomConnection
