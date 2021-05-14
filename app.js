@@ -55,14 +55,14 @@ io.on('connection', (socket) => {
     socket.on('join', (roomName, password) => {
         socket.join(roomName)
         totalConnections++
-        const room = rooms.addRoom(roomName, '')
+        const room = rooms.addRoom(roomName, '', password)
 
         if(room.password === password){
             room.allowedList.indexOf(socket.id) === -1 ? room.allowedList.push(socket.id) : console.log("This item already exists");
             console.log(room.allowedList)
+            socket.to(roomName).emit('datachannel', 'A new user joined the room')
         }
 
-        socket.to(roomName).emit('datachannel', 'A new user joined the room')
     })
 
     socket.on('datachannel', (room, data) => {
@@ -77,7 +77,6 @@ io.on('connection', (socket) => {
                 socket.to(room).emit('datachannel', data)
             } else {
                 socket.emit('systemchannel', 'Wrong Password')
-                console.log("wrong password")
             }
         }
     })
