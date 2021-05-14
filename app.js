@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
             socket.to(room).emit('datachannel', data)
         }
         else{
-            io.emit('datachannel', JSON.stringify('Wrong Password'))
+            io.emit('datachannel', 'Wrong Password')
             console.log("wrong password")
         }
     })
