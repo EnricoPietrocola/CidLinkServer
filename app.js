@@ -55,15 +55,14 @@ io.on('connection', (socket) => {
     socket.on('join', (roomName, password) => {
         socket.join(roomName)
         totalConnections++
-        rooms.addRoom(roomName, '')
+        const room = rooms.addRoom(roomName, '')
 
-        console.log(password)
-
-        if (rooms.getRoomURL(roomName) !== '') {
-            console.log('Sending room url to client ' + rooms.getRoomURL(roomName) + ' on page ' + rooms.findRoomByName(roomName).currentPage)
-        } else {
-            //console.log('Room Url not set')
+        if(room.password === password){
+            room.allowedList.indexOf(socket.id) === -1 ? room.allowedList.push(socket.id) : console.log("This item already exists");
+            console.log(room.allowedList)
         }
+
+
         socket.to(roomName).emit('datachannel', 'A new user joined the room')
     })
 
@@ -87,7 +86,11 @@ io.on('connection', (socket) => {
 })
 
 /*io.use((socket, next) => {
+
+    //check wether the user is in the whitelist or not
     if (socket.request.password === "pwd"){
+        //password must be stored somewhere in the request and compared
+        //with the password stored in the room.
         console.log("Right Password")
         next();
     }

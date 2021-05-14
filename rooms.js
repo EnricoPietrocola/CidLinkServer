@@ -11,6 +11,7 @@ function Room(name, docURL){
     this.currentPage = 1;
     this.connections = 0;
     this.password = "pwd"
+    this.allowedList = []
 }
 
 let rooms = Array();
