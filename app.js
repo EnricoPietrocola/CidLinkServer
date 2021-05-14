@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
         }
         else{
             console.log("wrong password")
-            socket.emit('datachannel', "Wrong Password")
+            io.to(socket).emit('datachannel', "Wrong Password")
         }
     })
 
