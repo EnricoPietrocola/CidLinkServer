@@ -70,11 +70,19 @@ io.on('connection', (socket) => {
         //if user is in allowed list, send data to others
         if (requestedRoom != null) {
             if (requestedRoom.allowedList.indexOf(socket.id) !== -1) {
-                console.log(room + " " + data)
-                if (isJson(data)) {
-                    console.log(room + " " + JSON.parse(data))
-                }
                 socket.to(room).emit('datachannel', data)
+            } else {
+                socket.emit('systemchannel', 'Wrong Password')
+            }
+        }
+    })
+
+    socket.on('objchannel', (room, data) => {
+        const requestedRoom = rooms.findRoomByName(room)
+        //if user is in allowed list, send data to others
+        if (requestedRoom != null) {
+            if (requestedRoom.allowedList.indexOf(socket.id) !== -1) {
+                socket.to(room).emit('objchannel', data)
             } else {
                 socket.emit('systemchannel', 'Wrong Password')
             }

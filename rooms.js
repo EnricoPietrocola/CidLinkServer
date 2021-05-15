@@ -30,7 +30,6 @@ function addRoom(name, password){
         return findRoomByName(name)
     }
     else{
-        console.log('Item added' + name + " " + password)
         const room = new Room(name, password)
         rooms.push(room)
         incrementRoomConnection(room)
