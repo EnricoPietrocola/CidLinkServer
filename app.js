@@ -55,9 +55,9 @@ io.on('connection', (socket) => {
     socket.on('join', (roomName, password) => {
         socket.join(roomName)
         totalConnections++
-        const room = rooms.addRoom(roomName, '', password)
+        const room = rooms.addRoom(roomName, password)
 
-        if(room.password === password){
+        if(room.password === password || room.password === ""){
             room.allowedList.indexOf(socket.id) === -1 ? room.allowedList.push(socket.id) : console.log("This item already exists");
             console.log(room.allowedList)
             socket.to(roomName).emit('datachannel', 'A new user joined the room')

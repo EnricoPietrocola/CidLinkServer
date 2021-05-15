@@ -4,11 +4,9 @@
 const fs = require('fs')
 //const rimraf = require('rimraf')
 
-function Room(name, docURL, password){
+function Room(name, password = ""){
     this.name = name;
-    this.docURL = docURL;
     this.roomPath = '';
-    this.currentPage = 1;
     this.connections = 0;
     this.password = password
     this.allowedList = []
@@ -24,7 +22,7 @@ function findRoomByName(name){
     else return null;
 }
 
-function addRoom(name, docURL, password){
+function addRoom(name, password){
     if (rooms.some(e => e.name === name)) {
         console.log('Item already there')
         const room = findRoomByName(name)
@@ -32,8 +30,8 @@ function addRoom(name, docURL, password){
         return findRoomByName(name)
     }
     else{
-        console.log('Item added')
-        const room = new Room(name, docURL, password)
+        console.log('Item added' + name + " " + password)
+        const room = new Room(name, password)
         rooms.push(room)
         incrementRoomConnection(room)
         return room
