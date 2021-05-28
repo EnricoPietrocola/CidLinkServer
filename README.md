@@ -7,7 +7,7 @@ A room based, easy to setup, real-time server/client communication system built 
 
 [Cid Link Max](https://github.com/EnricoPietrocola/CidLinkMax)
 
-## How to install
+## How to use
 Run "node app.js"
 
 
