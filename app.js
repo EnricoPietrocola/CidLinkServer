@@ -70,6 +70,7 @@ io.on('connection', (socket) => {
         //if user is in allowed list, send data to others
         if (requestedRoom != null) {
             if (requestedRoom.allowedList.indexOf(socket.id) !== -1) {
+                console.log(data)
                 socket.to(room).emit('datachannel', data)
             } else {
                 socket.emit('systemchannel', 'Wrong Password')
