@@ -16,7 +16,7 @@ const cert = args[2]
 const ca = args[3]
 let domain = args[4]
 
-let PORT = args[0]
+let PORT = args[0] || 5000
 
 // testing homepage
 app.get('/', (req, res) => {
